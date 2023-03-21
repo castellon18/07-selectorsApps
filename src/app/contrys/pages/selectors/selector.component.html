@@ -1,0 +1,96 @@
+<h1>Selector Group</h1>
+
+<hr/>
+
+<form [formGroup]="myForm" (submit)="guardar()">
+
+    <!-- Selector of Continents -->
+
+    <div class="row mb-3">
+
+        <div class="col">
+
+            <label class="form-lable">Continents</label>
+
+            <select class="form-control" formControlName="region">
+
+                <option value=""> -- Selected a Continent </option>
+                <option *ngFor="let region of regions" [value]="region | lowercase "> {{ region | titlecase  }} </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <!-- Selector of Countries -->
+    
+    <div class="row mb-3" *ngIf="countries.length !== 0">
+
+        <div class="col">
+
+            <label class="form-lable">Countries</label>
+
+            <select class="form-control" formControlName="countries">
+
+                <option value=""> -- Selected a Country </option>
+                <option *ngFor="let country of countries" [value]="country.cca2"> {{ country.name.common | titlecase  }} </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <!-- Selector of Borders -->
+    
+    <div class="row mb-3" *ngIf="borders.length > 0">
+
+        <div class="col">
+
+            <label class="form-lable">Borders</label>
+
+            <select class="form-control" formControlName="borders">
+
+                <option value=""> -- Selected a country border </option>
+                <option *ngFor="let border of borders" [value]="border.cca2"> {{ border.name.common }} </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <div class="row" *ngIf="loading">
+        
+        <div class="col">
+            
+            <div class="alert alert-primary">
+                
+                cargando....
+            
+            </div>        
+        
+        </div>
+    
+    </div>
+
+    <div class="row">
+        
+        <div class="col">
+
+            <button class="btn btn-primary float-end" type="submit">
+                Seleccion
+            </button>
+
+        </div>
+    
+    </div>
+
+</form>
+
+<br/>
+
+<pre>Form Valid: {{ myForm.valid }} </pre>
+
+<pre>Form Value: {{ myForm.value | json }} </pre>
